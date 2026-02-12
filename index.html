@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码奇迹 - 个人网站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#F5F7FA',
+                        accent: '#FF7D00',
+                        dark: '#1E293B',
+                        light: '#FFFFFF',
+                        muted: '#94A3B8',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .animate-fade-in {
+                animation: fadeIn 1s ease-in-out;
+            }
+            .animate-slide-up {
+                animation: slideUp 0.8s ease-out;
+            }
+            .animate-pulse-slow {
+                animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .bg-gradient-primary {
+                background: linear-gradient(135deg, #165DFF 0%, #0E42C2 100%);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(135deg, #165DFF, #0E42C2);
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-secondary text-gray-800">
+    <!-- 导航栏 -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-md fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-bold text-gradient flex items-center gap-2 transition-all duration-300 hover:scale-105">
+                    <i class="fa fa-code text-primary"></i>
+                    <span>Code</span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="font-medium hover:text-primary transition-colors relative group">
+                        主页
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#contact" class="font-medium hover:text-primary transition-colors relative group">
+                        联系我
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-primary focus:outline-none transition-all duration-300 hover:scale-110">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="md:hidden hidden pt-4 pb-2 animate-fade-in">
+                <a href="index.html" class="block py-3 font-medium hover:text-primary transition-colors px-2 rounded-lg hover:bg-primary/5">主页</a>
+                <a href="#contact" class="block py-3 font-medium hover:text-primary transition-colors px-2 rounded-lg hover:bg-primary/5">联系我</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="pt-32 pb-12 bg-gradient-to-br from-primary/10 to-secondary relative overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 -right-20 w-80 h-80 bg-accent/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-1/3 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <!-- 头像 -->
+                <div class="w-36 h-36 mx-auto mb-8 rounded-full overflow-hidden border-4 border-white shadow-xl flex items-center justify-center bg-gray-100 transition-all duration-500 hover:shadow-2xl hover:scale-105">
+                    <img src="img/icon/icon.png" alt="代码奇迹" class="w-full h-full object-contain transition-transform duration-700 hover:scale-110">
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-shadow animate-fade-in">
+                    你好，我是 <span class="text-primary relative inline-block">
+                        <span class="relative z-10">代码奇迹</span>
+                        <span class="absolute bottom-1 left-0 w-full h-3 bg-primary/20 -rotate-1 rounded-full"></span>
+                    </span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl mx-auto leading-relaxed">
+                    热爱编程的软件开发者，专注于创造有价值的技术产品和分享编程知识
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 社交媒体 -->
+    <section class="py-12 bg-secondary">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">关注我的<span class="text-primary">动态</span></h2>
+                <p class="text-gray-600">在这些平台上可以找到我，欢迎关注和交流</p>
+            </div>
+            <div class="max-w-2xl mx-auto">
+                <div class="flex flex-wrap justify-center gap-6">
+                    <!-- Bilibili -->
+                    <a href="https://space.bilibili.com/1786990005" target="_blank" class="flex items-center justify-center p-6 bg-white rounded-xl hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg w-full md:w-[250px] group">
+                        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <svg width="24" height="24" viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="zhuzhan-icon">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.73252 2.67094C3.33229 2.28484 3.33229 1.64373 3.73252 1.25764C4.11291 0.890684 4.71552 0.890684 5.09591 1.25764L7.21723 3.30403C7.27749 3.36218 7.32869 3.4261 7.37081 3.49407H10.5789C10.6211 3.4261 10.6723 3.36218 10.7325 3.30403L12.8538 1.25764C13.2342 0.890684 13.8368 0.890684 14.2172 1.25764C14.6175 1.64373 14.6175 2.28484 14.2172 2.67094L13.364 3.49407H14C16.2091 3.49407 18 5.28493 18 7.49407V12.9996C18 15.2087 16.2091 16.9996 14 16.9996H4C1.79086 16.9996 0 15.2087 0 12.9996V7.49406C0 5.28492 1.79086 3.49407 4 3.49407H4.58579L3.73252 2.67094ZM4 5.42343C2.89543 5.42343 2 6.31886 2 7.42343V13.0702C2 14.1748 2.89543 15.0702 4 15.0702H14C15.1046 15.0702 16 14.1748 16 13.0702V7.42343C16 6.31886 15.1046 5.42343 14 5.42343H4ZM5 9.31747C5 8.76519 5.44772 8.31747 6 8.31747C6.55228 8.31747 7 8.76519 7 9.31747V10.2115C7 10.7638 6.55228 11.2115 6 11.2115C5.44772 11.2115 5 10.7638 5 10.2115V9.31747ZM12 8.31747C11.4477 8.31747 11 8.76519 11 9.31747V10.2115C11 10.7638 11.4477 11.2115 12 11.2115C12.5523 11.2115 13 10.7638 13 10.2115V9.31747C13 8.76519 12.5523 8.31747 12 8.31747Z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h3 class="font-bold text-gray-800 group-hover:text-primary transition-colors">Bilibili</h3>
+                            <p class="text-sm text-gray-500">视频教程和技术分享</p>
+                        </div>
+                    </a>
+                    <!-- GitHub -->
+                    <a href="https://github.com/dmqj123" target="_blank" class="flex items-center justify-center p-6 bg-white rounded-xl hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg w-full md:w-[250px] group">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mr-4 transition-colors group-hover:bg-gray-800 group-hover:text-white">
+                            <i class="fa fa-github text-2xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <h3 class="font-bold text-gray-800 group-hover:text-primary transition-colors">GitHub</h3>
+                            <p class="text-sm text-gray-500">开源项目和代码仓库</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术栈 -->
+    <section class="py-20 bg-gradient-to-br from-white to-secondary relative overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 -left-20 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+                我的<span class="text-primary">技术栈</span>
+                <span class="block text-sm font-normal text-gray-500 mt-2">掌握的技术和工具</span>
+            </h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-wrap justify-center gap-5">
+                    <span class="px-5 py-3 bg-white rounded-full text-primary font-medium shadow-sm hover:shadow-md hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">Flutter</span>
+                    <span class="px-5 py-3 bg-white rounded-full text-primary font-medium shadow-sm hover:shadow-md hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">Python</span>
+                    <span class="px-5 py-3 bg-white rounded-full text-primary font-medium shadow-sm hover:shadow-md hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">C++</span>
+                    <span class="px-5 py-3 bg-white rounded-full text-primary font-medium shadow-sm hover:shadow-md hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">C#</span>
+                    <span class="px-5 py-3 bg-white rounded-full text-primary font-medium shadow-sm hover:shadow-md hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">.NET</span>
+                    <span class="px-5 py-3 bg-white rounded-full text-primary font-medium shadow-sm hover:shadow-md hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">Java</span>
+                    <span class="px-5 py-3 bg-white rounded-full text-primary font-medium shadow-sm hover:shadow-md hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">ASP.NET</span>
+                    <span class="px-5 py-3 bg-white rounded-full text-primary font-medium shadow-sm hover:shadow-md hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">JavaScript</span>
+                    <span class="px-5 py-3 bg-white rounded-full text-primary font-medium shadow-sm hover:shadow-md hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">HTML/CSS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目与教程 -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+                我的<span class="text-primary">作品</span>
+                <span class="block text-sm font-normal text-gray-500 mt-2">创意与技术的结合</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Kooly项目 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover border border-gray-100 group">
+                    <div class="h-56 flex items-center justify-center overflow-hidden relative bg-gray-50">
+                        <img src="https://kooly.faistudio.top/material/icon.png" alt="Kooly桌面宠物" class="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-4 text-white">
+                                <span class="px-3 py-1 bg-primary/90 text-white text-xs rounded-full">桌面应用</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">Kooly</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2">一个可爱的桌面宠物应用，为你的电脑增添乐趣，支持多种互动方式</p>
+                        <a href="https://kooly.faistudio.top/" target="_blank" class="text-primary font-medium flex items-center group-hover:translate-x-1 transition-transform">
+                            查看项目 <i class="fa fa-external-link ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- MagicBox项目 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover border border-gray-100 group">
+                    <div class="h-56 flex items-center justify-center overflow-hidden relative bg-gray-50">
+                        <img src="https://github.com/dmqj123/magic_box/blob/master/logo.png?raw=true" alt="MagicBox搜索工具" class="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-4 text-white">
+                                <span class="px-3 py-1 bg-primary/90 text-white text-xs rounded-full">系统工具</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">MagicBox</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2">开源的Windows全域搜索工具，让文件查找更高效，支持快速索引和实时搜索</p>
+                        <a href="https://github.com/dmqj123/magic_box/" target="_blank" class="text-primary font-medium flex items-center group-hover:translate-x-1 transition-transform">
+                            查看项目 <i class="fa fa-external-link ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- 电子成绩单项目 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover border border-gray-100 group">
+                    <div class="h-56 flex items-center justify-center overflow-hidden relative bg-gray-50">
+                        <img src="https://gms.faistudio.top/appicon.png" alt="电子成绩单" class="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-4 text-white">
+                                <span class="px-3 py-1 bg-primary/90 text-white text-xs rounded-full">移动应用</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">电子成绩单</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2">鸿蒙app，方便查看和管理学习成绩，支持数据可视化和趋势分析</p>
+                        <a href="https://gms.faistudio.top/" target="_blank" class="text-primary font-medium flex items-center group-hover:translate-x-1 transition-transform">
+                            查看项目 <i class="fa fa-external-link ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Godot教程 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover border border-gray-100 group">
+                    <div class="h-56 flex items-center justify-center overflow-hidden relative bg-gray-50">
+                        <img src="https://i2.hdslb.com/bfs/archive/d1540659abc578d243d734b480fb55cedec76ace.jpg@672w_378h_1c.avif" alt="Godot编程教程" class="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-4 text-white">
+                                <span class="px-3 py-1 bg-primary/90 text-white text-xs rounded-full">教程</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">Godot编程教程</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2">在Bilibili上分享的Godot游戏引擎编程教程，方便小白快速入门游戏开发</p>
+                        <a href="https://www.bilibili.com/video/BV1St4meVEdx" target="_blank" class="text-primary font-medium flex items-center group-hover:translate-x-1 transition-transform">
+                            前往Bilibili观看 <i class="fa fa-external-link ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- 爬虫、抓包教程 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover border border-gray-100 group">
+                    <div class="h-56 flex items-center justify-center overflow-hidden relative bg-gray-50">
+                        <img src="https://i2.hdslb.com/bfs/archive/96c4aee286080b18e09d2d3399514f65019439b5.jpg@672w_378h_1c.avif" alt="爬虫、抓包教程" class="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-4 text-white">
+                                <span class="px-3 py-1 bg-primary/90 text-white text-xs rounded-full">教程</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">爬虫、抓包教程</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2">快速掌握http抓包和爬虫技术，从基础到实战，适合数据采集爱好者</p>
+                        <a href="https://www.bilibili.com/video/BV1yEthzUE1L/" target="_blank" class="text-primary font-medium flex items-center group-hover:translate-x-1 transition-transform">
+                            前往Bilibili观看 <i class="fa fa-external-link ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系信息 -->
+    <section id="contact" class="py-24 bg-gradient-to-br from-white to-secondary relative overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+            <div class="absolute top-20 -left-20 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">联系<span class="text-primary">我</span></h2>
+                <p class="text-gray-600">有任何问题或合作意向，欢迎通过以下方式联系我</p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- QQ -->
+                    <div class="flex flex-col items-center justify-center p-8 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group">
+                        <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <i class="fa fa-qq text-3xl text-primary"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">QQ</h3>
+                        <p class="text-gray-600 font-medium">1056372908</p>
+                    </div>
+                    <!-- 电子邮件 -->
+                    <div class="flex flex-col items-center justify-center p-8 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group">
+                        <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <i class="fa fa-envelope text-3xl text-primary"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">邮箱</h3>
+                        <p class="text-gray-600 font-medium">1056372908@qq.com</p>
+                    </div>
+                    <!-- 技术交流群 -->
+                    <div class="flex flex-col items-center justify-center p-8 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group">
+                        <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <i class="fa fa-comments text-3xl text-primary"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">交流群</h3>
+                        <p class="text-gray-600 font-medium">1020108124</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex items-center justify-center gap-2 mb-6">
+                    <i class="fa fa-code text-primary text-2xl"></i>
+                    <h3 class="text-2xl font-bold">Code</h3>
+                </div>
+                <p class="text-gray-400 mb-8 max-w-md mx-auto">
+                    热爱编程的软件开发者，专注于创造有价值的技术产品和分享编程知识
+                </p>
+                <div class="flex justify-center space-x-8 mb-8">
+                    <a href="https://space.bilibili.com/1786990005" target="_blank" class="hover:text-primary transition-all duration-300 transform hover:scale-110">
+                        <i class="fa fa-bilibili text-xl"></i>
+                    </a>
+                    <a href="https://github.com/dmqj123" target="_blank" class="hover:text-primary transition-all duration-300 transform hover:scale-110">
+                        <i class="fa fa-github text-xl"></i>
+                    </a>
+                </div>
+                <div class="pt-8 border-t border-gray-800">
+                    <p class="text-gray-500 text-sm">
+                        © 2026 代码奇迹. 保留所有权利.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    // 关闭移动端菜单
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+                nav.classList.remove('shadow-md');
+            } else {
+                nav.classList.remove('shadow-lg');
+                nav.classList.add('shadow-md');
+            }
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // 观察需要动画的元素
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // 技术栈标签动画
+        const techTags = document.querySelectorAll('.text-primary.font-medium');
+        techTags.forEach((tag, index) => {
+            tag.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // 项目卡片悬停效果增强
+        const projectCards = document.querySelectorAll('.card-hover');
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // 社交媒体链接动画
+        const socialLinks = document.querySelectorAll('footer a');
+        socialLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.2) rotate(5deg)';
+            });
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0)';
+            });
+        });
+    </script>
+</body>
+</html>
